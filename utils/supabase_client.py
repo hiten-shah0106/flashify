@@ -11,7 +11,6 @@ SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def get_user_from_token(token):
-    """Get user info from JWT token"""
     try:
         user_response = supabase.auth.get_user(token)
         if user_response and user_response.user:
