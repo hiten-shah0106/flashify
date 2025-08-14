@@ -7,7 +7,6 @@ from utils.supabase_client import supabase, get_user_from_token
 deck_bp = Blueprint("decks", __name__)
 
 def extract_token(request):
-    """Helper function to extract and validate token"""
     auth_header = request.headers.get("Authorization")
     if not auth_header:
         return None, "Missing Token"
@@ -29,7 +28,6 @@ def get_decks():
         return jsonify({"error": auth_error}), 401
     
     try:
-        # Set the JWT for RLS to work
         supabase.postgrest.auth(token)
         decks = supabase.table("decks").select("*").execute()
         return jsonify(decks.data), 200
