@@ -5,7 +5,6 @@ from utils.supabase_client import supabase, get_user_from_token
 card_bp = Blueprint("cards", __name__)
 
 def extract_token(request):
-    """Helper function to extract and validate token"""
     auth_header = request.headers.get("Authorization")
     if not auth_header:
         return None, "Missing Token"
