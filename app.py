@@ -7,7 +7,7 @@ from routes.deck_routes import deck_bp
 from routes.card_routes import card_bp
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  
 
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(deck_bp, url_prefix="/decks")
@@ -18,4 +18,4 @@ def health_check():
     return {"status": "OK", "message": "Flashcard API is running"}, 200
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
