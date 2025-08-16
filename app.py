@@ -7,7 +7,7 @@ from routes.deck_routes import deck_bp
 from routes.card_routes import card_bp
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(deck_bp, url_prefix="/decks")
