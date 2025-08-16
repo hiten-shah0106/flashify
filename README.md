@@ -135,7 +135,6 @@ Error responses follow this format:
 
 -   JWT-based authentication
 -   Row Level Security (RLS) with Supabase
--   User data isolation
 -   Token validation on protected routes
 -   CORS configuration for frontend integration
 

@@ -28,7 +28,6 @@ def get_decks():
         return jsonify({"error": auth_error}), 401
     
     try:
-        # Set the JWT for RLS to work
         supabase.postgrest.auth(token)
         decks = supabase.table("decks").select("*").execute()
         return jsonify(decks.data), 200
