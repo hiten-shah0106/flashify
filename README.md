@@ -139,8 +139,6 @@ Error responses follow this format:
 -   Token validation on protected routes
 -   CORS configuration for frontend integration
 
-## Development
-
 ### Requirements
 
 The application requires the following Python packages (see `requirements.txt`):

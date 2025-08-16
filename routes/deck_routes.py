@@ -7,7 +7,6 @@ from utils.supabase_client import supabase, get_user_from_token
 deck_bp = Blueprint("decks", __name__)
 
 def extract_token(request):
-    """Helper function to extract and validate token"""
     auth_header = request.headers.get("Authorization")
     if not auth_header:
         return None, "Missing Token"
@@ -78,3 +77,22 @@ def delete_deck(deck_id):
         return jsonify({"message": "Deck deleted"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@deck_bp.route("/<deck_id>", methods=["GET"])
+def get_deck(deck_id):
+    token, error = extract_token(request)
+    if error:
+        return jsonify({"error": error}), 401
+    
+    user, auth_error = get_user_from_token(token)
+    if auth_error:
+        return jsonify({"error": auth_error}), 401
+
+    # Fetch the deck from Supabase
+    try:
+        supabase.postgrest.auth(token)
+        response = supabase.table("decks").select("*").eq("id", deck_id).single().execute()
+        return jsonify(response.data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
