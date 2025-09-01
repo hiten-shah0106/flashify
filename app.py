@@ -16,6 +16,3 @@ app.register_blueprint(card_bp, url_prefix="/cards")
 @app.route("/", methods=["GET"])
 def health_check():
     return {"status": "OK", "message": "Flashcard API is running"}, 200
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
